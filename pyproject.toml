@@ -1,0 +1,82 @@
+[build-system]
+requires = ["flit_core>=3.4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "predql_tasks"
+version = "0.1.0"
+description = "predql-tasks: Examples and workflows for task generation using PredQL"
+authors = [{ name = "Oleksii Kolesnichenko", email = "oleksii.kolesnichenko@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.12"
+keywords = ["predictive-query-language", "sql", "temporal-data", "relational-learning"]
+dependencies = [
+    # predql, for now we depend on the git version, but we should switch to a released version once it is available
+    "pandas>=2.2.0", # is in predql
+    "antlr4-python3-runtime>=4.13.2", # is in predql
+    "duckdb>=1.0.0", # is in predql
+    "relbench>=1.1.0",
+    "redelex"
+]
+
+[dependency-groups]
+[project.optional-dependencies]
+notebook = [
+    "ipykernel>=7.1.0",
+    "jupyter>=1.0.0",
+    "ipywidgets>=8.1.0"
+]
+dev = [
+    "tqdm>=4.66.0",
+    "ruff>=0.14.10"
+]
+torch = [
+    "torch==2.4.0",
+    "torch-geometric>=2.6.1",
+    "torch-sparse>=0.6.18",
+    "torch-scatter>=2.1.2",
+    "torch-cluster>=1.6.3",
+    "torch-spline-conv>=1.2.2",
+    "pyg-lib>=0.4.0",
+    "pytorch-frame>=0.2.5",
+    "sentence-transformers"
+]
+
+[project.urls]
+Repository = "https://github.com/kolesole/TasksPredQL"
+Issues = "https://github.com/kolesole/TasksPredQL/issues"
+
+[tool.ruff]
+line-length = 121
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "B",    # flake8-bugbear
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "SIM",  # flake8-simplify
+    "UP",   # pyupgrade
+    "W",    # pycodestyle warnings
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.uv]
+find-links = [
+    "https://download.pytorch.org/whl/cu121",
+    "https://data.pyg.org/whl/torch-2.4.0+cu121.html"
+]
+
+[tool.uv.extra-build-dependencies]
+    torch-cluster = ["torch"]
+    torch-scatter = ["torch"]
+    torch-sparse = ["torch"]
+    torch-spline-conv = ["torch"]
