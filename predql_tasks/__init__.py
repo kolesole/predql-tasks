@@ -1,3 +1,5 @@
+import redelex
+
 from predql_tasks import base
 from predql_tasks import tasks
 

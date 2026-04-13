@@ -14,6 +14,8 @@ from .predql_stat_tasks import (
     GrantsOrganizationAwardsAmountStatTask,
 )
 from .predql_tmp_tasks import (
+    SFScoresBusinessesScoresTmpTask,
+
     StatsPostVotesTmpTask,
     StatsUserBadgeTmpTask,
     StatsUserEngagementTmpTask,
@@ -26,6 +28,8 @@ from .predql_tmp_tasks import (
 )
 
 __all__ = [
+    "SFScoresBusinessesScoresTmpTask",
+    
     "StatsUserReputationStatTask",
     "StatsPostTagsStatTask",
     "StatsUserBadgeStatTask",
