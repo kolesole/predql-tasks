@@ -216,3 +216,9 @@ __marimo__/
 .streamlit/secrets.toml
 
 predql/
+predqll/
+experiments/model_training/hf_token.txt
+
+cache*
+.cache*
+*.pt
