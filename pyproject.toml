@@ -11,10 +11,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 keywords = ["predictive-query-language", "sql", "temporal-data", "relational-learning"]
 dependencies = [
-    # predql, for now we depend on the git version, but we should switch to a released version once it is available
-    "pandas>=2.2.0", # is in predql
-    "antlr4-python3-runtime>=4.13.2", # is in predql
-    "duckdb>=1.0.0", # is in predql
+    "predql",
     "relbench>=1.1.0",
     "redelex"
 ]
