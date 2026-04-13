@@ -8,6 +8,24 @@ from relbench.base import TaskType
 from predql_tasks.base import PredQLTmpTask
 
 
+######### DATASET: ctu-sfscores #########
+
+class SFScoresBusinessesScoresTmpTask(PredQLTmpTask):
+    """Predict maximum future scores for each business in the next 182 days."""
+    
+    dataset = get_dataset("ctu-sfscores", download=False)
+    entity_table = "businesses"
+    task_type = TaskType.MULTICLASS_CLASSIFICATION
+
+    timedelta = pd.Timedelta(days=365//2)
+    val_timestamp = pd.Timestamp("2015-12-17")
+    test_timestamp = pd.Timestamp("2016-06-16")
+
+    predql_query = """
+          PREDICT MAX(inspections.score, 0, 182, DAYS)
+          FOR EACH businesses.*;     
+     """
+    
 ######### DATASET: сtu-stats #########
 
 class StatsUserBadgeTmpTask(PredQLTmpTask):
