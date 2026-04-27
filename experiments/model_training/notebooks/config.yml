@@ -1,0 +1,29 @@
+shared:
+  text_embedder_model_name: "sentence-transformers/average_word_embeddings_glove.6B.300d"
+  batch_size: 256
+  num_neighbors: [15, 10, 5]
+  in_channels: 128
+  learning_rate: 0.0005
+  dropout: 0.4
+  num_epochs: 30
+  num_runs: 5
+
+mlp_head:
+  in_channels: 128
+  hidden_channels: 256
+  layers: 2
+  act: "relu"
+  norm: "layer_norm"
+  dropout: 0.3
+  bias: True
+
+gnn_heads:
+  sage:
+    channels: 128
+    aggr: "mean"
+    layers: 3
+  
+  hgt:
+    channels: 128
+    heads: 2
+    layers: 3
