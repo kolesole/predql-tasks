@@ -4,16 +4,26 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "predql_tasks"
-version = "0.1.0"
+version = "0.0.1"
 description = "predql-tasks: Examples and workflows for task generation using PredQL"
 authors = [{ name = "Oleksii Kolesnichenko", email = "oleksii.kolesnichenko@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.12"
-keywords = ["predictive-query-language", "sql", "temporal-data", "relational-learning"]
+keywords = [
+    "predictive-query-language",
+    "sql",
+    "relational-deep-learning",
+    "deep-learning",
+    "relational-learning",
+    "machine-learning",
+    "temporal-data",
+    "task-generation"
+]
 dependencies = [
-    "predql",
+    "predql==0.0.2",
     "relbench>=1.1.0",
-    "redelex"
+    "redelex",
+    "numpy"
 ]
 
 [dependency-groups]
@@ -22,10 +32,6 @@ notebook = [
     "ipykernel>=7.1.0",
     "jupyter>=1.0.0",
     "ipywidgets>=8.1.0"
-]
-dev = [
-    "tqdm>=4.66.0",
-    "ruff>=0.14.10"
 ]
 torch = [
     "torch==2.4.0",
@@ -36,16 +42,25 @@ torch = [
     "torch-spline-conv>=1.2.2",
     "pyg-lib>=0.4.0",
     "pytorch-frame>=0.2.5",
-    "sentence-transformers"
+    "sentence-transformers",
+    "scikit-learn",
+    "matplotlib"
+]
+dev = [
+    "predql_tasks[notebook]",
+    "predql_tasks[torch]",
+    "tqdm>=4.66.0",
+    "ruff>=0.14.10"
 ]
 
 [project.urls]
-Repository = "https://github.com/kolesole/TasksPredQL"
-Issues = "https://github.com/kolesole/TasksPredQL/issues"
+Repository = "https://github.com/kolesole/predql-tasks"
+Issues = "https://github.com/kolesole/predql-tasks/issues"
 
 [tool.ruff]
 line-length = 121
 target-version = "py312"
+extend-exclude = ["experiments/*",]
 
 [tool.ruff.lint]
 select = [

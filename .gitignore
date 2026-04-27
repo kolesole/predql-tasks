@@ -217,8 +217,9 @@ __marimo__/
 
 predql/
 predqll/
-experiments/model_training/hf_token.txt
+experiments/model_training/notebooks/hf_token.txt
 
 cache*
 .cache*
 *.pt
+tmp/
