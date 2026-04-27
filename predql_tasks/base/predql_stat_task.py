@@ -3,7 +3,6 @@
 from copy import deepcopy
 
 import numpy as np
-
 from predql.base import Table
 from predql.converter import SConverter
 
@@ -12,18 +11,18 @@ from .predql_base_task import PredQLBaseTask
 
 class PredQLStatTask(PredQLBaseTask):
     r"""Static PredQL task class.
-    
+
     This class is used for classic static tasks without time predictions.
 
     Atributes:
         target_table (Table): The attribute is used to store the task table without splitting (Default=None).
     """
-    
+
     target_table: Table=None
 
     def _get_table(self, split: str) -> Table:
         r"""Get the task table for the given split.
-        
+
         Args:
             split (str): Split to get the task table for ("train"/"val"/"test").
         """

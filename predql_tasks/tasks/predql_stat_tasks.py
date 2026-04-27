@@ -1,10 +1,9 @@
 """Collection of pre-defined PredQL static tasks on ctu datasets."""
 
-from relbench.datasets import get_dataset
 from relbench.base import TaskType
+from relbench.datasets import get_dataset
 
 from predql_tasks.base import PredQLStatTask
-
 
 ######### DATASET: сtu-stats #########
 
@@ -39,7 +38,7 @@ class StatsPostTagsStatTask(PredQLStatTask):
 
 class StatsUserBadgeStatTask(PredQLStatTask):
     """Predict the total number of badges for each user."""
-    
+
     dataset = get_dataset("ctu-stats", download=False)
     entity_table = "users"
     task_type = TaskType.REGRESSION
@@ -67,13 +66,13 @@ class StatsUserEngagementStatTask(PredQLStatTask):
 
 class StatsPostVotesStatTask(PredQLStatTask):
     """Predict the number of upvotes for each valid question post."""
-    
+
     dataset = get_dataset("ctu-stats", download=False)
     entity_table = "posts"
     task_type = TaskType.REGRESSION
-     
+
     predql_query = """
-          PREDICT COUNT_DISTINCT(votes.* 
+          PREDICT COUNT_DISTINCT(votes.*
                WHERE votes.votetypeid == 2)
           FOR EACH posts.* WHERE posts.PostTypeId == 1
                              AND posts.OwnerUserId IS NOT NULL
@@ -83,10 +82,11 @@ class StatsPostVotesStatTask(PredQLStatTask):
 
 class StatsUserPostCommentStatTask(PredQLStatTask):
     """Predict which posts each user comments on."""
-    
+
     dataset = get_dataset("ctu-stats", download=False)
     entity_table = "users"
     task_type = TaskType.LINK_PREDICTION
+    dst_table = "comments"
 
     predql_query = """
           PREDICT LIST_DISTINCT(comments.FK_posts_PostId
@@ -102,6 +102,7 @@ class StatsPostPostRelatedStatTask(PredQLStatTask):
     dataset = get_dataset("ctu-stats", download=False)
     entity_table = "posts"
     task_type = TaskType.LINK_PREDICTION
+    dst_table = "postLinks"
 
     predql_query = """
           PREDICT LIST_DISTINCT(postLinks.FK_posts_PostId)
@@ -112,7 +113,7 @@ class StatsPostPostRelatedStatTask(PredQLStatTask):
 
 class GrantsAwardsInstitutionStatTask(PredQLStatTask):
     """Predict the institution connected to each award."""
-    
+
     dataset = get_dataset("ctu-grants", download=False)
     entity_table = "awards"
     task_type = TaskType.MULTICLASS_CLASSIFICATION
@@ -134,11 +135,11 @@ class GrantsCountInstitutionAwardsStatTask(PredQLStatTask):
           PREDICT COUNT_DISTINCT(institution_awards.*)
           FOR EACH institution.*;
      """
-    
+
 
 class GrantsOrganizationAwardsAmountStatTask(PredQLStatTask):
     """Predict total awarded amount for each organization."""
-    
+
     dataset = get_dataset("ctu-grants", download=False)
     entity_table = "organization"
     task_type = TaskType.REGRESSION

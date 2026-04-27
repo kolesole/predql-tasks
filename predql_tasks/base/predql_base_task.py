@@ -1,40 +1,32 @@
 """Base PredQL task class."""
 
 from abc import ABC, abstractmethod
-from functools import lru_cache
+from functools import cache
 
+import numpy as np
+from predql.base import Table
+from predql.converter import Converter
 from relbench.base import Dataset, TaskType
 from relbench.metrics import (
-##### REGRESSION metrics #####
-    mae, 
-    mse,
-    r2,
-##### BINARY CLASSIFICATION metrics #####
-    roc_auc,
+    accuracy,
     average_precision,
     f1,
-##### MULTICLASS CLASSIFICATION metrics #####
-    accuracy,
     macro_f1,
+    mae,
     micro_f1,
-##### MULTILABEL CLASSIFICATION metrics #####
+    mse,
     multilabel_auprc_macro,
     multilabel_auprc_micro,
     multilabel_f1_macro,
     multilabel_f1_micro,
-##### LINK PREDICTION metrics #####
-    link_prediction_recall,
-    link_prediction_precision,
-    link_prediction_map
+    r2,
+    roc_auc,
 )
-
-from predql.base import Table
-from predql.converter import Converter
 
 
 class PredQLBaseTask(ABC):
     r"""Base PredQL task class with share attributes and methods.
-    
+
     Attributes:
         converter (Converter): Converter to convert the PredQL query to a task table (Default=None).
         dataset (Dataset): Dataset to get the database for the task.
@@ -50,6 +42,8 @@ class PredQLBaseTask(ABC):
     predql_query: str
     task_type: TaskType
     entity_table: str
+    # for LINK_PREDICTION tasks
+    dst_table: str=None
     # same for all tasks
     entity_col: str="fk"
     target_col: str="label"
@@ -71,7 +65,16 @@ class PredQLBaseTask(ABC):
 
         return table
 
-    def compute_metrics(self, logits, labels):
+    def compute_metrics(self, logits: np.ndarray, labels: np.ndarray) -> dict:
+        r"""Compute the metrics for the given logits and labels.
+
+        Args:
+            logits (np.ndarray): Logits predicted by the model.
+            labels (np.ndarray): True labels.
+
+        Returns:
+            out (dict): Dictionary of metric names and their values.
+        """
         match self.task_type:
             case TaskType.REGRESSION:
                 return {
@@ -80,46 +83,44 @@ class PredQLBaseTask(ABC):
                     "r2": r2(labels, logits)
                 }
             case TaskType.BINARY_CLASSIFICATION:
-                preds = (logits > 0.5).astype(int)
                 return {
+                    "accuracy": accuracy(labels, logits),
                     "roc_auc": roc_auc(labels, logits),
                     "average_precision": average_precision(labels, logits),
-                    "f1": f1(labels, preds)
+                    "f1": f1(labels, logits)
                 }
             case TaskType.MULTICLASS_CLASSIFICATION:
-                preds = logits.argmax(axis=1)
                 return {
                     "accuracy": accuracy(labels, logits),
                     "macro_f1": macro_f1(labels, logits),
                     "micro_f1": micro_f1(labels, logits)
                 }
             case TaskType.MULTILABEL_CLASSIFICATION:
-                preds = (logits > 0.5).astype(int)
                 return {
                     "auprc_macro": multilabel_auprc_macro(labels, logits),
                     "auprc_micro": multilabel_auprc_micro(labels, logits),
-                    "f1_macro": multilabel_f1_macro(labels, preds),
-                    "f1_micro": multilabel_f1_micro(labels, preds)
+                    "f1_macro": multilabel_f1_macro(labels, logits),
+                    "f1_micro": multilabel_f1_micro(labels, logits)
                 }
             case TaskType.LINK_PREDICTION:
                 return {
-                    "recall": link_prediction_recall(labels, logits),
-                    "precision": link_prediction_precision(labels, logits),
-                    "map": link_prediction_map(labels, logits)
+                    "roc_auc": roc_auc(labels, logits),
+                    "average_precision": average_precision(labels, logits),
+                    "f1": f1(labels, logits)
                 }
             case _:
                 pass
 
     @abstractmethod
-    @lru_cache(maxsize=None)
+    @cache
     def _get_table(self, split: str) -> Table:
         r"""Get the task table for the given split.
-        
+
         Must be implemented by the child class.
 
         Args:
             split (str): Split to get the task table for ("train"/"val"/"test").
-        
+
         Returns:
             out (Table): Task table for the given split.
         """

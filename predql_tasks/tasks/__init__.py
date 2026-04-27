@@ -1,35 +1,40 @@
 """PredQL pre-defined tasks."""
 
 from .predql_stat_tasks import (
-    StatsPostTagsStatTask,
-    StatsUserReputationStatTask,
-    StatsUserBadgeStatTask,
-    StatsUserEngagementStatTask,
-    StatsPostVotesStatTask,
-    StatsUserPostCommentStatTask,
-    StatsPostPostRelatedStatTask,
-
     GrantsAwardsInstitutionStatTask,
     GrantsCountInstitutionAwardsStatTask,
     GrantsOrganizationAwardsAmountStatTask,
+    StatsPostPostRelatedStatTask,
+    StatsPostTagsStatTask,
+    StatsPostVotesStatTask,
+    StatsUserBadgeStatTask,
+    StatsUserEngagementStatTask,
+    StatsUserPostCommentStatTask,
+    StatsUserReputationStatTask,
 )
 from .predql_tmp_tasks import (
+    ######### RelBench tasks (defined with PredQL)
+    RelF1DriverDNFTmpTask,
+    RelF1DriverPositionTmpTask,
+    RelF1DriverTop3TmpTask,
+    RelStackPostPostRelatedTmpTask,
+    RelStackPostVotesTmpTask,
+    RelStackUserBadgeTmpTask,
+    RelStackUserEngagementTmpTask,
+    RelStackUserPostCommentTmpTask,
+    SeznamClientFirstServisTmpTask,
+    SeznamClientOutOfWalletTmpTask,
+    SeznamClientServisTmpTask,
+    SeznamClientSpendingTmpTask,
     SFScoresBusinessesScoresTmpTask,
-
+    StatsPostPostRelatedTmpTask,
     StatsPostVotesTmpTask,
     StatsUserBadgeTmpTask,
     StatsUserEngagementTmpTask,
     StatsUserPostCommentTmpTask,
-    StatsPostPostRelatedTmpTask,
-
-    SeznamClientOutOfWalletTmpTask,
-    SeznamClientServisTmpTask,
-    SeznamClientSpendingTmpTask
 )
 
 __all__ = [
-    "SFScoresBusinessesScoresTmpTask",
-    
     "StatsUserReputationStatTask",
     "StatsPostTagsStatTask",
     "StatsUserBadgeStatTask",
@@ -42,6 +47,8 @@ __all__ = [
     "GrantsCountInstitutionAwardsStatTask",
     "GrantsOrganizationAwardsAmountStatTask",
 
+    "SFScoresBusinessesScoresTmpTask",
+
     "StatsUserBadgeTmpTask",
     "StatsUserEngagementTmpTask",
     "StatsPostVotesTmpTask",
@@ -50,5 +57,16 @@ __all__ = [
 
     "SeznamClientOutOfWalletTmpTask",
     "SeznamClientServisTmpTask",
-    "SeznamClientSpendingTmpTask"
+    "SeznamClientFirstServisTmpTask",
+    "SeznamClientSpendingTmpTask",
+
+    "RelF1DriverDNFTmpTask",
+    "RelF1DriverTop3TmpTask",
+    "RelF1DriverPositionTmpTask",
+
+    "RelStackUserEngagementTmpTask",
+    "RelStackUserBadgeTmpTask",
+    "RelStackPostVotesTmpTask",
+    "RelStackUserPostCommentTmpTask",
+    "RelStackPostPostRelatedTmpTask"
 ]

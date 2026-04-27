@@ -3,7 +3,6 @@
 from functools import cached_property
 
 import pandas as pd
-
 from predql.base import Table
 from predql.converter import TConverter
 
@@ -12,7 +11,7 @@ from .predql_base_task import PredQLBaseTask
 
 class PredQLTmpTask(PredQLBaseTask):
     r"""Temporal PredQL task class.
-    
+
     This class is used for temporal tasks with time predictions.
 
     Attributes:
@@ -33,7 +32,7 @@ class PredQLTmpTask(PredQLBaseTask):
     @cached_property
     def _train_timestamps(self) -> "pd.Series[pd.Timestamp]":
         r"""Get the training timestamps for the time predictions.
-        
+
         Returns:
             out (pd.Series[pd.Timestamp]): Training timestamps for the time predictions.
         """
@@ -43,7 +42,7 @@ class PredQLTmpTask(PredQLBaseTask):
 
         return pd.date_range(start=start, end=end, freq=freq)
 
-    
+
     @cached_property
     def _val_timestamps(self) -> "pd.Series[pd.Timestamp]":
         r"""Get the validation timestamps for the time predictions.
@@ -61,7 +60,7 @@ class PredQLTmpTask(PredQLBaseTask):
 
         return pd.date_range(start=start, end=end, freq=freq)
 
-    
+
     @cached_property
     def _test_timestamps(self) -> "pd.Series[pd.Timestamp]":
         r"""Get the test timestamps for the time predictions.
@@ -86,7 +85,7 @@ class PredQLTmpTask(PredQLBaseTask):
 
         Args:
             split (str): Split to get the task table for ("train"/"val"/"test").
-        
+
         Returns:
             out (Table): Task table for the given split.
         """
