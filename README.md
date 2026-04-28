@@ -42,7 +42,7 @@ We implemented and trained several GNN architectures, including:
 - **GraphSAGE** ([`sage_model.py`](./experiments/model_training/training/models/sage_model.py))
 - **Heterogeneous Graph Transformer (HGT)** ([`hgt_model.py`](./experiments/model_training/training/models/hgt_model.py))
 
-These GNN models were combined with an **MLP** head for the final prediction and trained using the **AdamW** optimizer for 30 epochs with an early stopping patience of 10. 
+These GNN models were combined with an **MLP** head for the final prediction and trained using the **AdamW** optimizer for 30 epochs with an early stopping patience of 10.
 
 ### ⚙️ Configuration
 
@@ -62,7 +62,9 @@ The [`notebooks/`](./experiments/model_training/notebooks/) directory contains v
 
 ### 📊 Used Tasks & Results
 
-In this section, we summarize our results across different tasks, ranging from re-defined standard RelBench tasks to new tasks defined on the CTU relational datasets.
+In this section, we summarize our results across different tasks, ranging from re-defined standard RelBench tasks to new tasks defined on the CTU relational datasets.  
+
+Reported metrics are averaged over 5 independent runs.
 
 <table>
   <thead>
