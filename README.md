@@ -25,8 +25,8 @@ The task generation pipeline is built around several core classes that are desig
 
 - [**`PredQLBaseTask`**](./predql_tasks/base/predql_base_task.py): A simplified version of the `BaseTask` class from *RelBench*.   
 It provides essential methods:
-  - `get_table(split: str)`: Retrieves the data table for a specific data split ("train", "val", or "test").
-  - `compute_metrics(logits: np.ndarray, labels: np.ndarray)`: Evaluates the model's predictions against ground-truth labels.
+  - [`get_table(split: str)`](./predql_tasks/base/predql_base_task.py#L51): Retrieves the data table for a specific data split ("train", "val", or "test").
+  - [`compute_metrics(logits: np.ndarray, labels: np.ndarray)`](./predql_tasks/base/predql_base_task.py#L68): Evaluates the model's predictions against ground-truth labels.
 - [**`PredQLStatTask`**](./predql_tasks/base/predql_stat_task.py): A specialized class for defining static deep learning tasks.
 - [**`PredQLTmpTask`**](./predql_tasks/base/predql_tmp_task.py): A specialized class for defining temporal deep learning tasks.
 
@@ -98,7 +98,7 @@ In this section, we summarize our results across different tasks, ranging from r
   </thead>
   <tbody>
     <tr style="text-align: center;">
-      <td><code>F1 Driver DNF (RelBench)</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L217"><code>F1 Driver DNF (RelBench)</code></td>
       <td>
         For each driver predict if they will DNF (did not finish) a race in the next 1 month (Binary Classification)
       </td>
@@ -119,7 +119,7 @@ In this section, we summarize our results across different tasks, ranging from r
       <td><img src="plots/relbench_bc_hgt.png"/></td>
     </tr>
     <tr style="text-align: center;">
-      <td><code>F1 Driver Position (RelBench)</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L256"><code>F1 Driver Position (RelBench)</code></td>
       <td>
         Predict the average finishing position of each driver across all races in the next 2 months (Regression)
       </td>
@@ -140,7 +140,7 @@ In this section, we summarize our results across different tasks, ranging from r
       <td><img src="plots/relbench_reg_hgt.png"/></td>
     </tr>
     <tr style="text-align: center;">
-      <td><code>Seznam Client Out of Wallet</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L129"><code>Seznam Client Out of Wallet</code></td>
       <td>
         Predict whether a client will spend outside their wallet in the next 30 days (Binary Classification)
       </td>
@@ -161,7 +161,7 @@ In this section, we summarize our results across different tasks, ranging from r
       <td><img src="plots/rel_fel_bc_hgt.png"/></td>
     </tr>
     <tr style="text-align: center;">
-      <td><code>Seznam Client First Service</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L172"><code>Seznam Client First Service</code></td>
       <td>
         Predict the first service a client will use in the next 30 days (Multiclass Classification)
       </td>
@@ -182,7 +182,7 @@ In this section, we summarize our results across different tasks, ranging from r
       <td><img src="plots/rel_fel_mcc_hgt.png"/></td>
     </tr>
     <tr style="text-align: center;">
-      <td><code>Seznam Client Services</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L151"><code>Seznam Client Services</code></td>
       <td>
         Predict the services a client will use in the next 30 days (Multilabel Classification)
       </td>
@@ -203,7 +203,7 @@ In this section, we summarize our results across different tasks, ranging from r
       <td><img src="plots/rel_fel_mlc_hgt.png"/></td>
     </tr>
     <tr style="text-align: center;">
-      <td><code>Seznam Client Spending</code></td>
+      <td><a href="./predql_tasks/tasks/predql_tmp_tasks.py#L193"><code>Seznam Client Spending</code></td>
       <td>
         Predict client spending amount in the next 30 days (Regression)
       </td>
